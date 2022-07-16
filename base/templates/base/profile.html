@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+<main class="profile-page layout layout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    <div class="topics">
+      {% include 'base/topic_component.html' %}
+    </div>
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    <div class="roomList">
+      <div class="profile">
+        <div class="profile__avatar">
+          <div class="avatar avatar--large active">
+            <img src="{{user.avatar.url}}" />
+          </div>
+        </div>
+        <div class="profile__info">
+          <h3>{{ user.username}}</h3>
+          <p>@{{ user.username}}</p>
+          {% if request.user == user %}
+          <a href="{% url 'updateUser' %}" class="btn btn--main btn--pill">Edit Profile</a>
+          {% else %}
+          {% endif %}
+          
+        </div>
+         <div class="profile__about">
+          <h3>About</h3>
+          <p>
+            {{user.bio}}
+          </p>
+        </div>
+      </div>
+
+      <div class="roomList__header">
+        <div>
+          <h2>Study Rooms Hosted by dennis_ivy</a>
+          </h2>
+        </div>
+      </div>
+      <div class="roomListRoom">
+        {% include 'base/room_component.html' %}
+      </div>
+      
+    </div>
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    <div class="activities">
+      {% include 'base/activity_component.html' %}
+    </div>
+    <!-- Activities End -->
+  </div>
+</main>
+
+
+
+{% comment %}
+<style>
+  .profile-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+</style>
+{{ user.username }}
+
+<div class="profile-container">
+
+
+
+  <div>
+    {% include 'base/topic_component.html' %}
+  </div>
+
+  <div>
+    {% for room in rooms %}
+    <div>
+      {% include 'base/room_component.html' %}
+    </div>
+    <hr>
+    {% endfor %}
+
+  </div>
+  <div>
+    {% include 'base/activity_component.html' %}
+  </div>
+
+
+
+</div> {% endcomment %}
+{% endblock content %}
